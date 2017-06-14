@@ -91,10 +91,19 @@ class Logic {
      * @Page: human-resource
      */
     public function human_resource() {
+        // Staffs' list:
+        $dbh = (new DB())->dbh;
+        $sql = "SELECT s.id id, s.name name, s.sex sex, s.dob dob, w.position position
+            FROM _staff s JOIN _work w ON s.id=w.staff_id
+            ORDER BY s.id DESC LIMIT 10";
+        $stmt = $dbh->prepare($sql);
+        $stmt->execute();
+        $staffs = $stmt->fetchAll(\PDO::FETCH_OBJ);
 
         return [
             'title' => 'ធនធានមនុស្ស',
             'page' => 'hr',
+            'staffs' => $staffs,
         ];
     }
 

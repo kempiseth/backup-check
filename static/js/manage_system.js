@@ -11,9 +11,6 @@ function delete_user(userid){
 }
 
 $(function(){
-    $('div.task div.title').click(function(){
-        $(this).parent().find('div.content').toggle('slow');
-    });
     $('table#select-user img.icon[action="delete"]').click(function(){
         var userid = $(this).parent().parent().attr('userid');
         delete_user(userid);

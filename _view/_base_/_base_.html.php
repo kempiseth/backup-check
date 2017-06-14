@@ -52,25 +52,13 @@
             </main>
             <footer>
                 <div id="copyright" title="Author: កែម ពិសិដ្ឋ [017 228 500]">
-                    &copy; <?php echo date('Y') ?> TLN - រក្សារសិទ្ធគ្រប់យ៉ាង
+                    &copy; <?php echo date('Y').' '.SITE_NAME ?> - រក្សារសិទ្ធគ្រប់យ៉ាង
                 </div>
             </footer>
         </div>
 
         <script src="/static/js/app.js"></script>
-        <script>
-            var _width = $(window).width();
-
-            $('header span.menu-icon').click(function(){
-                $('nav#nav-main').toggle('slow');
-            });
-            $( window ).on('resize', function() {
-                if ( _width != $(this).width() ) {
-                    $('nav#nav-main').toggle($('header span.menu-icon').is(':hidden'));
-                    _width = $(this).width();
-                }
-            });
-        </script>
+        <script src="/static/js/main.js"></script>
         <?= @$js ?>
     </body>
 </html>

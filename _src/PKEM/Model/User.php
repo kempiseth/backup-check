@@ -62,7 +62,7 @@ class User {
             $stmt->bindValue(':roles', json_encode($this->roles));
             $stmt->execute();
         } else {
-            $_SESSION['message'] = "User <code>{$this->username}</code> already exists.";
+            $_SESSION['message'] = "អ្នកប្រើប្រាស់ <code>{$this->username}</code> មានរួចហើយ";
         }
     }
 
@@ -107,6 +107,14 @@ class User {
 
     public function canInsert() {
         return in_array('insert', $this->roles);
+    }
+
+    public function canDelete() {
+        return in_array('delete', $this->roles);
+    }
+
+    public function canUpdate() {
+        return in_array('update', $this->roles);
     }
 
 }

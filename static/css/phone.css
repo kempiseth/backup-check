@@ -2,9 +2,12 @@
     table tr td {
         display: block;
     }
-    table#select-user td.action {
+    table td.action {
         float: right;
         padding: 12px;
+    }
+    table td.action img {
+        margin: 0 8px;
     }
     table td#roles label {
         width: 48%;

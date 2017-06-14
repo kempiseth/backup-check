@@ -2,11 +2,13 @@
 
 use PKEM\Model\User;
 
+$canDelete = $_SESSION['user']->canDelete();
 $usersRows = '';
 foreach ($users as $user) {
-    $deleteIcon = ($user->username == User::ADMIN_USER || 
+    $deleteIcon = (!$canDelete || 
+        $user->username == User::ADMIN_USER || 
         $user->username == $_SESSION['user']->username) ? 
-        '' : "<img class='icon' action='delete' src='/static/image/delete.jpg'>";
+        '' : "<img class='icon' action='delete' src='/static/image/delete.jpg' title='Remove'>";
     $usersRows .= "<tr userid='{$user->id}'>
     <td>{$user->username}</td>
     <td>{$user->roles}</td>

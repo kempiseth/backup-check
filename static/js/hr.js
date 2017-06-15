@@ -7,7 +7,7 @@ $(function(){
         var action = $(this).attr('action');
     });
     $('table#select-staff tr').click(function(){
-        var staffid = $(this).attr('staffid');
-        window.location.href = base_url+'/detail?staffid='+staffid;
+        var staff_id = $(this).attr('staff_id');
+        window.location.href = base_url+'/detail?staff_id='+staff_id;
     });
 });

@@ -110,9 +110,9 @@ class Logic {
         // Staff's details:
         $dbh = (new DB())->dbh;
         $sql = "SELECT * FROM _staff s JOIN _work w ON s.id=w.staff_id
-            WHERE s.id=:staffid";
+            WHERE s.id=:staff_id";
         $stmt = $dbh->prepare($sql);
-        $stmt->bindValue(':staffid', $_REQUEST['staffid']);
+        $stmt->bindValue(':staff_id', $_REQUEST['staff_id']);
         $stmt->execute();
         $staff = $stmt->fetch(\PDO::FETCH_OBJ);
 

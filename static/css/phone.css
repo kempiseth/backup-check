@@ -2,9 +2,12 @@
     table tr td {
         display: block;
     }
+    table.key-value tr td {
+        display: table-cell;
+    }
     table td.action {
         float: right;
-        padding: 12px;
+        padding: 8px;
     }
     table td.action img {
         margin: 0 8px;

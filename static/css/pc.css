@@ -84,6 +84,7 @@ table#select-user tr {
 img.icon {
     width: 22px;
     cursor: pointer;
+    z-index: 10;
 }
 span.menu-icon {
     display: none;
@@ -91,4 +92,10 @@ span.menu-icon {
 div#copyright {
     margin-left: 31%;
     font-size: 11px;
+}
+table.key-value tr td:first-child {
+    color: darkorange;
+}
+table.key-value tr td:last-child {
+    color: green;
 }

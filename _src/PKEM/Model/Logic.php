@@ -106,6 +106,22 @@ class Logic {
             'staffs' => $staffs,
         ];
     }
+    private function human_resource_detail() {
+        // Staff's details:
+        $dbh = (new DB())->dbh;
+        $sql = "SELECT * FROM _staff s JOIN _work w ON s.id=w.staff_id
+            WHERE s.id=:staffid";
+        $stmt = $dbh->prepare($sql);
+        $stmt->bindValue(':staffid', $_REQUEST['staffid']);
+        $stmt->execute();
+        $staff = $stmt->fetch(\PDO::FETCH_OBJ);
+
+        return [
+            'title' => $staff->name,
+            'page' => 'hr-detail',
+            'details' => $staff,
+        ];
+    }
 
     /**
      * @Page: account

@@ -20,12 +20,12 @@ class User {
         $this->password = $password;
         $this->roles = is_string($roles) ? json_decode($roles) : $roles;
 
-        $this->initialize();
+        //$this->initialize();
     }
 
     private function initialize() {
-//        $this->checkTable();
-//        $this->checkRecords();
+        $this->checkTable();
+        $this->checkRecords();
     }
 
     public function getId() {

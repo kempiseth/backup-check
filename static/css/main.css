@@ -10,7 +10,10 @@ input._input {
     padding: 3px 6px;
     border: solid 1px #DDD;
 }
-a:hover {
+.active {
+    color: lightgreen;
+}
+.caution, a:hover {
     color: indianred;
     text-decoration: none;
 }

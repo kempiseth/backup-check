@@ -4,13 +4,14 @@ use PKEM\Model\Staff;
 
 $staffsRows = '';
 foreach ($staffs as $staff) {
+    $status = $staff->is_active ? 'active' : 'caution';
     $deleteIcon = $_SESSION['user']->canDelete() ?
         "<img class='icon' action='delete' src='/static/image/delete.jpg' title='Remove'>" : '';
     $updateIcon = $_SESSION['user']->canUpdate() ?
         "<img class='icon' action='update' src='/static/image/update.jpg' title='Edit'>" : '';
 
     $staffsRows .= "<tr staff_id='{$staff->id}'>
-    <td>{$staff->name}</td>
+    <td class='$status'>{$staff->name}</td>
     <td>{$staff->sex}</td>
     <td>{$staff->dob}</td>
     <td>{$staff->position}</td>

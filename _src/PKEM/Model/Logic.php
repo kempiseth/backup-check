@@ -93,7 +93,8 @@ class Logic {
     public function human_resource() {
         // Staffs' list:
         $dbh = (new DB())->dbh;
-        $sql = "SELECT s.id id, s.name name, s.sex sex, s.dob dob, w.position position
+        $sql = "SELECT s.id id, s.name name, s.sex sex, s.dob dob, 
+            w.position position, w.is_active is_active
             FROM _staff s JOIN _work w ON s.id=w.staff_id
             ORDER BY s.id DESC LIMIT 10";
         $stmt = $dbh->prepare($sql);
@@ -116,11 +117,19 @@ class Logic {
         $stmt->execute();
         $staff = $stmt->fetch(\PDO::FETCH_OBJ);
 
-        return [
-            'title' => $staff->name,
+        $_return = [
             'page' => 'hr-detail',
             'details' => $staff,
         ];
+
+        if ($staff) {
+            $_return['title'] = $staff->name;
+        } else {
+            $_SESSION['message'] = "រកមិនឃើញបុគ្គលិក";
+            $_return['title'] = "មិនឃើញ";
+        }
+
+        return $_return;
     }
 
     /**

@@ -33,7 +33,7 @@
                 <!-- Account related navs -->
                 <?php if(isset($_SESSION['userid'])): ?>
                     <a id="account" href="/account">គណនី</a>
-                    <a id="logout" href="/logout">ចាកចេញ</a>
+                    <a id="logout" class="caution" href="/logout">ចាកចេញ</a>
                 <?php endif; ?>
             </nav>
             <main class="group">

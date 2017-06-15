@@ -2,8 +2,11 @@
 
 use PKEM\Model\Staff;
 
-$staffDetails = "<table staff_id='{$details->staff_id}' class='key-value'>
-  <tr><td>ឈ្មោះពេញ</td><td>{$details->name}</td></tr>
+if ($details) {
+    $status = $details->is_active ? 'active' : 'caution';
+    $status_text = $details->is_active ? 'សកម្ម' : 'អសកម្ម';
+    $staffDetails = "<table staff_id='{$details->staff_id}' class='key-value list'>
+  <tr><td>ឈ្មោះពេញ</td><td class='$status'>{$details->name}</td></tr>
   <tr><td>ភេទ</td><td>{$details->sex}</td></tr>
   <tr><td>ថ្ងៃខែឆ្នាំកំណើត</td><td>{$details->dob}</td></tr>
   <tr><td>ទូរស័ព្ទ</td><td>{$details->phone}</td></tr>
@@ -16,10 +19,14 @@ $staffDetails = "<table staff_id='{$details->staff_id}' class='key-value'>
   <tr><td>ថ្ងៃចូលធ្វើការ</td><td>{$details->enroll_date}</td></tr>
   <tr><td>ប្រាក់ខែ</td><td>{$details->salary} USD</td></tr>
 </table>";
+} else {
+    $staffDetails = '';
+    $status_text = '';
+}
 
 $section = <<<"SECTION"
 <div id="staff-detail" class="task">
-    <div class="title">ព័ត៌មានលម្អិត</div>
+    <div class="title">ព័ត៌មានលម្អិត :: <span class="$status">$status_text</span> </div>
     <div class="content">
         $staffDetails
     </div>

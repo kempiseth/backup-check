@@ -98,6 +98,5 @@ table.key-value tr td:first-child {
     white-space: nowrap;
 }
 table.key-value tr td:last-child {
-    color: green;
     width: 75%;
 }

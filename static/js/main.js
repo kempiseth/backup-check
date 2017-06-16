@@ -13,4 +13,7 @@ $(function(){
     $('div.task div.title').click(function(){
         $(this).parent().find('div.content').toggle('slow');
     });
+    $('fieldset legend').click(function(){
+        $(this).parent().find('table').toggle();
+    });
 });

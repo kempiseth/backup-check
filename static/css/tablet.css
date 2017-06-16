@@ -17,7 +17,8 @@
         width: 100%;
     }
     table input[type='text'],
-    table input[type='password'] {
+    table input[type='password'],
+    table textarea {
         width: 90%;
     }
     table.key-value tr td:last-child {

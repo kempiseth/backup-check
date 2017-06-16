@@ -6,7 +6,10 @@ body, input, select, textarea, button {
     font-family: Dangrek, Muli, sans-serif;
     border-radius: 0;
 }
-input._input {
+textarea {
+    resize: vertical;
+}
+._input {
     padding: 3px 6px;
     border: solid 1px #DDD;
 }
@@ -20,6 +23,10 @@ input._input {
 legend {
     font-size: 17px;
 }
-body[page="login"] nav a {
+body[page="login"] nav a,
+fieldset table {
     display: none;
+}
+fieldset legend {
+    cursor: pointer;
 }

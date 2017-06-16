@@ -34,7 +34,8 @@
         cursor: pointer;
     }
     table input[type='text'],
-    table input[type='password'] {
+    table input[type='password'],
+    table textarea {
         width: 98%;
     }
 

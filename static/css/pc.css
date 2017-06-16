@@ -72,7 +72,8 @@ table tr td {
     padding: 5px 8px;
 }
 table input[type='text'],
-table input[type='password'] {
+table input[type='password'],
+table textarea {
     width: 80%;
 }
 table td#roles label {

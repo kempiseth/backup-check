@@ -51,7 +51,7 @@
                 </div>
             </main>
             <footer>
-                <div id="copyright" title="Author: កែម ពិសិដ្ឋ [017 228 500]">
+                <div id="copyright" title="កែម ពិសិដ្ឋ [017 228 500]">
                     &copy; <?php echo date('Y').' '.SITE_NAME ?> - រក្សារសិទ្ធគ្រប់យ៉ាង
                 </div>
             </footer>

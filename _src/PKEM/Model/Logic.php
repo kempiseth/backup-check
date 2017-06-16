@@ -91,9 +91,15 @@ class Logic {
      * @Page: human-resource
      */
     public function human_resource() {
+        // Insert a staff:
+        if (isset($_POST['name'])) {
+            $staff = new Staff($_POST);
+            $staff->insertIntoDB();
+        }
+
         // Staffs' list:
         $dbh = (new DB())->dbh;
-        $sql = "SELECT s.id id, s.name name, s.sex sex, s.dob dob, 
+        $sql = "SELECT s.id id, s.name name, s.sex sex, s.dob dob,
             w.position position, w.is_active is_active
             FROM _staff s JOIN _work w ON s.id=w.staff_id
             ORDER BY s.id DESC LIMIT 10";

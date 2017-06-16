@@ -14,6 +14,10 @@ $(function(){
         $(this).parent().find('div.content').toggle('slow');
     });
     $('fieldset legend').click(function(){
-        $(this).parent().find('table').toggle();
+        var table = $(this).parent().find('table');
+        table.toggle();
+        if(table.is(':visible')) {
+            table.find('input[type=text]').filter(':first').focus();
+        }
     });
 });

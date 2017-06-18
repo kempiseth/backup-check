@@ -40,4 +40,22 @@ class Background {
         echo json_encode($staffs);
     }
 
+    private function removeStaff() {
+        $dbh = (new DB())->dbh;
+        $sql = "DELETE FROM ".Staff::TABLE_NAME." WHERE id=:id";
+        $stmt = $dbh->prepare($sql);
+        $stmt->bindValue(':id', $_POST['staff_id']);
+        $_return = $stmt->execute();
+        echo $_return ? 'OK' : 'FAILED';
+    }
+
+    private function disableStaff() {
+        $dbh = (new DB())->dbh;
+        $sql = "UPDATE ".Staff::WORK_TABLE." SET is_active=0 WHERE staff_id=:staff_id";
+        $stmt = $dbh->prepare($sql);
+        $stmt->bindValue(':staff_id', $_POST['staff_id']);
+        $_return = $stmt->execute();
+        echo $_return ? 'OK' : 'FAILED';
+    }
+
 }

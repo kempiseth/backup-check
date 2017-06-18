@@ -6,7 +6,10 @@ $staffsRows = '';
 foreach ($staffs as $staff) {
     $status = $staff->is_active ? 'active' : 'caution';
     $deleteIcon = $_SESSION['user']->canDelete() ?
-        "<img class='icon' action='delete' src='/static/image/delete.jpg' title='Remove'>" : '';
+        ($staff->is_active ?
+            "<img class='icon' action='disable' src='/static/image/delete.jpg' title='Disable'>" :
+            "<img class='icon' action='remove' src='/static/image/delete-red.jpg' title='Remove'>"
+        ) : '';
     $updateIcon = $_SESSION['user']->canUpdate() ?
         "<img class='icon' action='update' src='/static/image/update.jpg' title='Edit'>" : '';
 

@@ -2,6 +2,9 @@
     table tr td {
         display: block;
     }
+    table.list tr {
+        border-bottom: dashed 1px whitesmoke;
+    }
     table.key-value tr td {
         display: table-cell;
     }

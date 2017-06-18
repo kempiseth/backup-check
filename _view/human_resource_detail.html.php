@@ -17,7 +17,7 @@ if ($details) {
   <tr><td>មុខតំណែង</td><td>{$details->position}</td></tr>
   <tr><td>នាយកដ្ឋាន</td><td>{$details->department}</td></tr>
   <tr><td>ថ្ងៃចូលធ្វើការ</td><td>{$details->enroll_date}</td></tr>
-  <tr><td>ប្រាក់ខែ</td><td>{$details->salary} USD</td></tr>
+  <tr><td>ប្រាក់ខែ</td><td class='caution'>{$details->salary} USD</td></tr>
 </table>";
 } else {
     $staffDetails = '';
@@ -25,6 +25,7 @@ if ($details) {
 }
 
 $section = <<<"SECTION"
+<a href="/human-resource">ត្រលប់ក្រោយ</a>
 <div id="staff-detail" class="task">
     <div class="title">ព័ត៌មានលម្អិត :: <span class="$status">$status_text</span> </div>
     <div class="content">

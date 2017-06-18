@@ -86,10 +86,16 @@ $staffInsert = $_SESSION['user']->canInsert() ?
   </fieldset>
 </form>" : '';
 
+$searchBox = '<div class="search-wrap">
+<i class="material-icons search-icon">search</i>
+<input type="search" id="staff-search" class="_input search-box" placeholder="ស្វែងរក...">
+</div>';
+
 $section = <<<"SECTION"
 <div id="staff" class="task">
     <div class="title">បុគ្គលិក</div>
     <div class="content">
+        $searchBox
         $staffsList
         $staffInsert
     </div>

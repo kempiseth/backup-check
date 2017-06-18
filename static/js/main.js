@@ -15,7 +15,7 @@ $(function(){
     });
     $('fieldset legend').click(function(){
         var table = $(this).parent().find('table');
-        table.toggle();
+        table.toggle('slow');
         if(table.is(':visible')) {
             table.find('input[type=text]').filter(':first').focus();
         }

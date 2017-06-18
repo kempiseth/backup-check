@@ -9,6 +9,7 @@
         <title><?= $title.' - '.SITE_NAME ?></title>
         <link href="https://fonts.googleapis.com/css?family=Dangrek&amp;subset=khmer" rel="stylesheet">
         <link href="https://fonts.googleapis.com/css?family=Muli" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
         <link href="/static/css/app.css" rel="stylesheet">
         <link href="/static/css/main.css" rel="stylesheet">
     </head>

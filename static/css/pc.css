@@ -101,3 +101,17 @@ table.key-value tr td:first-child {
 table.key-value tr td:last-child {
     width: 75%;
 }
+i.search-icon {
+    position: absolute;
+    margin: 6px;
+    font-size: 18px;
+}
+input[type=search] {
+    padding-left: 27px;
+    width: 150px;
+    -webkit-transition: width 0.5s ease-in-out;
+    transition: width 0.5s ease-in-out;
+}
+input[type=search]:focus {
+    width: 100%;
+}

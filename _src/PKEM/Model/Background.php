@@ -26,4 +26,18 @@ class Background {
         $_return = $stmt->execute();
         echo $_return ? 'OK' : 'FAILED';
     }
+
+    private function searchStaff() {
+        $dbh = (new DB())->dbh;
+        $sql = "SELECT s.id id, s.name name, s.sex sex, s.dob dob, w.position position, w.is_active is_active
+            FROM _staff s JOIN _work w ON s.id=w.staff_id
+            WHERE CONCAT_WS(' ',name,sex,dob,phone,address,education,skill,language,position,department) LIKE :text
+            LIMIT 30";
+        $stmt = $dbh->prepare($sql);
+        $stmt->bindValue(':text', '%'.$_POST['text'].'%');
+        $stmt->execute();
+        $staffs = $stmt->fetchAll(\PDO::FETCH_OBJ);
+        echo json_encode($staffs);
+    }
+
 }

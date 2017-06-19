@@ -25,7 +25,7 @@ if ($details) {
 }
 
 $section = <<<"SECTION"
-<a href="/human-resource">ត្រលប់ក្រោយ</a>
+<a class="back-button" href="/human-resource">ត្រលប់ក្រោយ</a>
 <div id="staff-detail" class="task">
     <div class="title">ព័ត៌មានលម្អិត :: <span class="$status">$status_text</span> </div>
     <div class="content">

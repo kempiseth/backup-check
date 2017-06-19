@@ -8,7 +8,7 @@ $(function(){
         var action = $(this).attr('action');
         var row = $(this).parent().parent();
         var staff_id = row.attr('staff_id');
-        if (action=='update' || ($.inArray(action, ['disable', 'remove']) != -1) && confirm('តើ​អ្នក​ប្រាកដ​ឬ​អត់?')) {
+        if ($.inArray(action, ['disable', 'remove']) != -1 && confirm('តើ​អ្នក​ប្រាកដ​ឬ​អត់?')) {
             $.post({
                 url: '',
                 data: {_ajax: action+'Staff', staff_id: staff_id},
@@ -18,13 +18,16 @@ $(function(){
                             row.remove();
                         } else if (action=='disable') {
                             row.find('td:first').attr('class','caution');
-                            img_icon.attr('src','/static/image/delete-red.jpg');
-                            img_icon.attr('action','remove');
-                            img_icon.attr('title','Remove');
+                            img_icon.attr({
+                                src: '/static/image/delete-red.jpg',
+                                action: 'remove',
+                                title: 'Remove'});
                         }
                     }
                 },
             });
+        } else if (action=='update') {
+            window.location.replace(base_url+'/edit?staff_id='+staff_id);
         }
     });
     $('table#select-staff').on('click','tr',function(){

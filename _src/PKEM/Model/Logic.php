@@ -119,13 +119,36 @@ class Logic {
         $sql = "SELECT * FROM _staff s JOIN _work w ON s.id=w.staff_id
             WHERE s.id=:staff_id";
         $stmt = $dbh->prepare($sql);
-        $stmt->bindValue(':staff_id', $_REQUEST['staff_id']);
+        $stmt->bindValue(':staff_id', $_GET['staff_id']);
         $stmt->execute();
         $staff = $stmt->fetch(\PDO::FETCH_OBJ);
 
         $_return = [
             'page' => 'hr-detail',
             'details' => $staff,
+        ];
+
+        if ($staff) {
+            $_return['title'] = $staff->name;
+        } else {
+            $_SESSION['message'] = "រកមិនឃើញបុគ្គលិក";
+            $_return['title'] = "មិនឃើញ";
+        }
+
+        return $_return;
+    }
+    private function human_resource_edit() {
+        $dbh = (new DB())->dbh;
+        $sql = "SELECT * FROM _staff s JOIN _work w ON s.id=w.staff_id
+            WHERE s.id=:staff_id";
+        $stmt = $dbh->prepare($sql);
+        $stmt->bindValue(':staff_id', $_GET['staff_id']);
+        $stmt->execute();
+        $staff = $stmt->fetch(\PDO::FETCH_OBJ);
+
+        $_return = [
+            'page' => 'hr-edit',
+            'staff' => $staff,
         ];
 
         if ($staff) {

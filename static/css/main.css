@@ -27,6 +27,18 @@ body[page="login"] nav a,
 fieldset table {
     display: none;
 }
+fieldset table.open {
+    display: table;
+}
 fieldset legend {
     cursor: pointer;
+}
+.mr20 {
+    margin-right: 20px;
+}
+a.back-button {
+    display: inline-block;
+    margin-bottom: 15px;
+    border: dashed 1px;
+    padding: 4px 8px;
 }

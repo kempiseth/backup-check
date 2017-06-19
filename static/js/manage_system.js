@@ -13,6 +13,8 @@ function delete_user(userid){
 $(function(){
     $('table#select-user img.icon[action="delete"]').click(function(){
         var userid = $(this).parent().parent().attr('userid');
-        delete_user(userid);
+        if(confirm('តើអ្នកប្រាកដឬអត់?')){
+            delete_user(userid);
+        }
     });
 });

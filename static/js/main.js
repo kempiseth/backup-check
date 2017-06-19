@@ -1,6 +1,8 @@
 $(function(){
     var _width = $(window).width();
+    var page = $('body').attr('page');
 
+    $('#nav-main a[page="'+page+'"]').addClass('active');
     $('header span.menu-icon').click(function(){
         $('nav#nav-main').toggle('slow');
     });

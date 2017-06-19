@@ -12,8 +12,8 @@
         float: right;
         padding: 8px;
     }
-    table td.action img {
-        margin: 0 8px;
+    td.action img.icon {
+        margin: 0 7px;
     }
     table td#roles label {
         width: 48%;

@@ -20,20 +20,20 @@
             </header>
             <nav id="nav-main">
                 <!-- Shown on all pages -->
-                <a href="/">ទំព័រដើម</a>
-                <a href="/human-resource">ធនធានមនុស្ស</a>
+                <a page="start" href="/">ទំព័រដើម</a>
+                <a page="hr" href="/human-resource">ធនធានមនុស្ស</a>
 
                 <!-- Page specific navs -->
                 <?= @$nav ?>
 
                 <!-- Shown on system pages -->
                 <?php if(@$_SESSION['isSuperUser']): ?>
-                    <a href="/manage-system">គ្រប់គ្រងប្រព័ន្ធ</a>
+                    <a page="manage_system" href="/manage-system">គ្រប់គ្រងប្រព័ន្ធ</a>
                 <?php endif; ?>
 
                 <!-- Account related navs -->
                 <?php if(isset($_SESSION['userid'])): ?>
-                    <a id="account" href="/account">គណនី</a>
+                    <a page="account" id="account" href="/account">គណនី</a>
                     <a id="logout" class="caution" href="/logout">ចាកចេញ</a>
                 <?php endif; ?>
             </nav>

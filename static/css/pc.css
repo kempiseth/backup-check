@@ -83,6 +83,7 @@ table#select-user tr {
     border-bottom: 1px solid #DDD;
 }
 img.icon {
+    margin: 0 3px;
     width: 22px;
     cursor: pointer;
     z-index: 10;

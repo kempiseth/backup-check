@@ -21,6 +21,9 @@
     table textarea {
         width: 90%;
     }
+    td.action img.icon {
+        margin: 0 5px;
+    }
     table.key-value tr td:last-child {
         width: auto;
     }

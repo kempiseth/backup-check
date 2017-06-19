@@ -26,7 +26,7 @@ $changePasswordForm = "<form name='change-password-form' method='post' autocompl
 
 $section = <<<"SECTION"
 <div id="account" class="task">
-  <div class="title">ការកំណត់​គណនី [ $username ]</div>
+  <div class="title">ការកំណត់​គណនី :: <span class="active">$username</span></div>
   <div class="content">
     $changePasswordForm
   </div>

@@ -2,6 +2,10 @@
 @import url('tablet.css');
 @import url('phone.css');
 
+html {
+    margin: 0 auto;
+    max-width: 1000px;
+}
 body, input, select, textarea, button {
     font-family: Dangrek, Muli, sans-serif;
     border-radius: 0;

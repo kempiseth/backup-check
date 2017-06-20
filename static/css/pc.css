@@ -92,7 +92,7 @@ span.menu-icon {
     display: none;
 }
 div#copyright {
-    margin-left: 31%;
+    text-align: center;
     font-size: 11px;
 }
 table.key-value tr td:first-child {

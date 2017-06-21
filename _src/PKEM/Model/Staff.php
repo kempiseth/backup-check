@@ -6,7 +6,7 @@ class Staff {
 
     const TABLE_NAME = "_staff";
     const WORK_TABLE = "_work";
-    const ID_PAD_LENGTH = 3;
+    const ID_PAD_LENGTH = 4;
 
     public $id;
     public $name;

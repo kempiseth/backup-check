@@ -56,11 +56,9 @@ $(function(){
                                     '<img class="icon" action="disable" src="/static/image/delete.jpg" title="Disable">' :
                                     '<img class="icon" action="remove" src="/static/image/delete-red.jpg" title="Remove">') : 
                                 '';
-                            var row = '<tr staff_id="'+value.id+
-                                '"><td class="' + (value.is_active ? 'active' : 'caution') + '">'+value.name+
-                                '</td><td>'+value.sex+
-                                '</td><td>'+value.dob+
-                                '</td><td>'+value.position+
+                            var row = '<tr staff_id="'+value.id+'"><td>'+('000'+value.id).slice(-4)+
+                                '</td><td class="' + (value.is_active ? 'active' : 'caution') + '">'+value.name+
+                                '</td><td>'+value.sex+'</td><td>'+value.dob+'</td><td>'+value.position+
                                 '</td><td class="action">'+update_img+delete_img+'</td></tr>';
                             $('table#select-staff').append(row);
                         });

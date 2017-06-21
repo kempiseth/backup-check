@@ -3,6 +3,7 @@
 use PKEM\Model\Staff;
 
 if ($details) {
+    $id = Staff::formatId($details->id);
     $status = $details->is_active ? 'active' : 'caution';
     $status_text = $details->is_active ? 'សកម្ម' : 'អសកម្ម';
     $staffDetails = "<table staff_id='{$details->staff_id}' class='key-value list'>
@@ -27,7 +28,7 @@ if ($details) {
 $section = <<<"SECTION"
 <a class="back-button" href="/human-resource">ត្រលប់ក្រោយ</a>
 <div id="staff-detail" class="task">
-    <div class="title">ព័ត៌មានលម្អិត :: <span class="$status">$status_text</span> </div>
+    <div class="title">ព័ត៌មានលម្អិត :: $id :: <span class="$status">$status_text</span> </div>
     <div class="content">
         $staffDetails
     </div>

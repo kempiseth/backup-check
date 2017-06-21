@@ -6,6 +6,7 @@ class Staff {
 
     const TABLE_NAME = "_staff";
     const WORK_TABLE = "_work";
+    const ID_PAD_LENGTH = 3;
 
     public $id;
     public $name;
@@ -62,6 +63,10 @@ class Staff {
         $stmt->bindValue(':enroll_date', $this->enroll_date);
         $stmt->bindValue(':salary', $this->salary);
         $stmt->execute();
+    }
+
+    static function formatId($id) {
+        return str_pad($id, self::ID_PAD_LENGTH, 0, STR_PAD_LEFT);
     }
 
 }

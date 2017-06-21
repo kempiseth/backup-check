@@ -117,4 +117,9 @@ class User {
         return in_array('update', $this->roles);
     }
 
+    static function formatRoles($json) {
+        $rolesArray = json_decode($json);
+        return implode(" | ", $rolesArray);
+    }
+
 }

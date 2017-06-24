@@ -5,7 +5,7 @@ use PKEM\Model\Staff;
 if ($details) {
     $id = Staff::formatId($details->id);
     $status = $details->is_active ? 'active' : 'caution';
-    $status_text = $details->is_active ? 'សកម្ម' : 'អសកម្ម';
+    $status_text = $details->is_active ? 'សកម្ម' : 'ឈប់ថ្ងៃ '.$details->leave_date;
     $staffDetails = "<table staff_id='{$details->staff_id}' class='key-value list'>
   <tr><td>ឈ្មោះពេញ</td><td class='$status'>{$details->name}</td></tr>
   <tr><td>ភេទ</td><td>{$details->sex}</td></tr>

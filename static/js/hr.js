@@ -17,7 +17,7 @@ $(function(){
                         if (action=='remove') {
                             row.remove();
                         } else if (action=='disable') {
-                            row.find('td:first').attr('class','caution');
+                            row.find('td:nth-child(2)').attr('class','caution');
                             img_icon.attr({
                                 src: '/static/image/delete-red.jpg',
                                 action: 'remove',

@@ -26,6 +26,14 @@ $staffUpdate = $_SESSION['user']->canUpdate() ?
         </select></td>
       </tr>
       <tr>
+        <td><label for='photo'>រូបថត</label></td>
+        <td><div class='portrait'>
+          <img src='{$staff->photo}'>
+          <input type='file' class='image-input' id='photo' title='រូបថត' accept='image/*'>
+          <input type='hidden' class='image-data' name='photo' value='{$staff->photo}'>
+        </div></td>
+      </tr>
+      <tr>
         <td><label for='dob'>ថ្ងៃខែឆ្នាំកំណើត</label></td>
         <td><input type='text' id='dob' name='dob' class='_input' required placeholder='YYYY-MM-DD'
           pattern='[0-9]{4}-(0[1-9]|1[012])-(0[1-9]|1[0-9]|2[0-9]|3[01])' title='YYYY-MM-DD' value='{$staff->dob}'></td>
@@ -85,6 +93,7 @@ $section = <<<"SECTION"
 SECTION;
 
 $js = <<<"JS"
+<script src="/static/js/hr.js"></script>
 <script>
 $('input[name=is_active][value={$staff->is_active}]').prop('checked',true);
 $('select[name=sex] option[value={$staff->sex}]').prop('selected',true);
@@ -92,6 +101,10 @@ $('input[name=is_active]').change(function() {
     var checked_color = $('input[name=is_active]:checked').css('color');
     $('input#name').css('color', checked_color);
 }).change();
+
+if( $('input.image-data').val() ){
+    $('div.portrait').css('border','none');
+}
 </script>
 JS;
 

@@ -65,7 +65,7 @@ class Background {
 
         $dbh = (new DB())->dbh;
         $sql = "UPDATE _staff s JOIN _work w ON (s.id = w.staff_id)
-          SET w.is_active=:is_active, s.name=:name, s.sex=:sex, s.dob=:dob, s.phone=:phone,
+          SET w.is_active=:is_active, s.name=:name, s.sex=:sex, s.photo=:photo, s.dob=:dob, s.phone=:phone,
             s.address=:address, s.education=:education, s.skill=:skill, s.language=:language,
             w.position=:position, w.department=:department, w.enroll_date=:enroll_date, w.leave_date=$leave_date, w.salary=:salary
           WHERE s.id=:staff_id";

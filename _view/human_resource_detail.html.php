@@ -7,6 +7,7 @@ if ($details) {
     $status = $details->is_active ? 'active' : 'caution';
     $status_text = $details->is_active ? 'សកម្ម' : 'ឈប់ថ្ងៃ '.$details->leave_date;
     $staffDetails = "<table staff_id='{$details->staff_id}' class='key-value list'>
+  <tr><td colspan='2'><img src='{$details->photo}'></td></tr>
   <tr><td>ឈ្មោះពេញ</td><td class='$status'>{$details->name}</td></tr>
   <tr><td>ភេទ</td><td>{$details->sex}</td></tr>
   <tr><td>ថ្ងៃខែឆ្នាំកំណើត</td><td>{$details->dob}</td></tr>
@@ -28,7 +29,7 @@ if ($details) {
 $section = <<<"SECTION"
 <a class="back-button" href="/human-resource">ត្រលប់ក្រោយ</a>
 <div id="staff-detail" class="task">
-    <div class="title">ព័ត៌មានលម្អិត :: $id :: <span class="$status">$status_text</span> </div>
+    <div class="title">ព័ត៌មានលម្អិត | $id | <span class="$status">$status_text</span> </div>
     <div class="content">
         $staffDetails
     </div>

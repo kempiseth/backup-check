@@ -116,3 +116,19 @@ input[type=search] {
 input[type=search]:focus {
     width: 100%;
 }
+div.portrait {
+    border: dotted 2px;
+    width: 154px;
+    height: 184px;
+    display: inline-block;
+    position: relative;
+}
+div.portrait canvas, div.portrait img {
+    position: absolute;
+    top: 0;
+}
+input.image-input {
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+}

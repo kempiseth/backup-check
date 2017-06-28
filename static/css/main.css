@@ -49,3 +49,6 @@ a.back-button {
     border: dashed 1px;
     padding: 4px 8px;
 }
+.float-right {
+    float: right;
+}

@@ -11,6 +11,7 @@ class Staff {
     public $id;
     public $name;
     public $sex;
+    public $photo;
     public $dob;
     public $phone;
     public $address;
@@ -27,6 +28,7 @@ class Staff {
     function __construct($data) {
         $this->name = $data['name'];
         $this->sex = $data['sex'];
+        $this->photo = $data['photo'];
         $this->dob = $data['dob'];
         $this->phone = $data['phone'];
         $this->address = $data['address'];
@@ -43,10 +45,11 @@ class Staff {
     public function insertIntoDB() {
         $dbh = (new DB())->dbh;
         $sql = "INSERT INTO ".self::TABLE_NAME." SET
-            name=:name, sex=:sex, dob=:dob, phone=:phone, address=:address, education=:education, skill=:skill, language=:language";
+            name=:name, sex=:sex, photo=:photo, dob=:dob, phone=:phone, address=:address, education=:education, skill=:skill, language=:language";
         $stmt = $dbh->prepare($sql);
         $stmt->bindValue(':name', $this->name);
         $stmt->bindValue(':sex', $this->sex);
+        $stmt->bindValue(':photo', $this->photo);
         $stmt->bindValue(':dob', $this->dob);
         $stmt->bindValue(':phone', $this->phone);
         $stmt->bindValue(':address', $this->address);

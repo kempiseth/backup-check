@@ -43,6 +43,13 @@ $staffInsert = $_SESSION['user']->canInsert() ?
         </select></td>
       </tr>
       <tr>
+        <td><label for='photo'>រូបថត</label></td>
+        <td><div class='portrait'>
+          <input type='file' class='image-input' id='photo' title='រូបថត' accept='image/*'>
+          <input type='hidden' class='image-data' name='photo' value=''>
+        </div></td>
+      </tr>
+      <tr>
         <td><label for='dob'>ថ្ងៃខែឆ្នាំកំណើត</label></td>
         <td><input type='text' id='dob' name='dob' class='_input' required placeholder='YYYY-MM-DD'
           pattern='[0-9]{4}-(0[1-9]|1[012])-(0[1-9]|1[0-9]|2[0-9]|3[01])' title='YYYY-MM-DD'></td>
@@ -98,7 +105,7 @@ $searchBox = '<div class="search-wrap">
 
 $section = <<<"SECTION"
 <div id="staff" class="task">
-    <div class="title">បុគ្គលិក</div>
+    <div class="title">បុគ្គលិក<button id="add-new" class="float-right">បញ្ចូលថ្មី</button></div>
     <div class="content">
         $searchBox
         $staffsList

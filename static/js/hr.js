@@ -1,6 +1,14 @@
 $(function(){
     var base_url = '/human-resource';
 
+    $('button#add-new').click(function(event){
+        event.stopPropagation();
+
+        var form = $("form[name='staff-insert-form']");
+        var table = form.find('table');
+        table.show();
+        table.find('input[type=text]').filter(':first').focus();
+    });
     $('table#select-staff').on('click','td.action img.icon',function(event){
         event.stopPropagation();
 
@@ -65,6 +73,51 @@ $(function(){
                     }
                 },
             });
+        }
+    });
+    $('input#photo').change(function(){
+        var MAX_WIDTH = 160;
+        var MAX_HEIGHT = 180;
+
+        if (this.files && this.files[0]) {
+            var f = this.files[0];
+            var reader = new FileReader();
+            var wrapper = $(this).parent();
+
+            reader.onload = function(e) {
+                if( ! wrapper.find('img').length ) wrapper.prepend('<img style="visibility:hidden">');
+                var img = wrapper.find('img')[0];
+
+                img.onload = function() {
+                    if( ! wrapper.find('canvas').length ) wrapper.prepend('<canvas></canvas>');
+                    var canvas = wrapper.find('canvas')[0];
+                    var width = img.width;
+                    var height = img.height;
+
+                    //if (width > height) {
+                      if (width > MAX_WIDTH) {
+                        height *= MAX_WIDTH / width;
+                        width = MAX_WIDTH;
+                      }
+                    //} else {
+                      if (height > MAX_HEIGHT) {
+                        width *= MAX_HEIGHT / height;
+                        height = MAX_HEIGHT;
+                      }
+                    //}
+
+                    canvas.width = width;
+                    canvas.height = height;
+                    var ctx = canvas.getContext("2d");
+                    ctx.drawImage(img, 0, 0, width, height);
+
+                    wrapper.find('input.image-data').val(canvas.toDataURL());
+                    wrapper.css('border','none');
+                    $(img).remove(); canvas.scrollIntoView();
+                }
+                img.src = e.target.result;
+            }
+            reader.readAsDataURL(f);
         }
     });
 });

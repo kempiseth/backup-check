@@ -1,4 +1,10 @@
 @media only screen and (max-width: 450px) {
+    div.wrapper {
+        padding: 10px;
+    }
+    label, button {
+        margin-right: 15px;
+    }
     table tr td {
         display: block;
     }
@@ -43,6 +49,9 @@
     table input[type='password'],
     table textarea {
         width: 98%;
+    }
+    input[type="time"] {
+        width: 30%;
     }
 
 }

@@ -20,6 +20,9 @@ textarea {
 input:read-only, textarea:read-only { 
     background-color: whitesmoke;
 }
+input[type="number"] {
+    width: 100px;
+}
 .active {
     color: lightgreen;
 }

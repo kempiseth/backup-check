@@ -114,6 +114,26 @@ class Logic {
         ];
     }
     private function human_resource_detail() {
+        // Insert a new shift:
+        if ( isset($_POST['position']) ) {
+            $data = $_POST;
+            $data['work_days'] = json_encode($data['work_days']);
+            $data['work_times'] = json_encode($data['work_times']);
+            if ($data['end_date']) {
+                $end_date = 'end_date=:end_date,';
+            } else {
+                $end_date = '';
+                unset($data['end_date']);
+            }
+
+            $dbh = (new DB())->dbh;
+            $sql = "INSERT INTO _shift SET 
+                staff_id=:staff_id, position=:position, salary=:salary, 
+                start_date=:start_date, $end_date work_days=:work_days, work_times=:work_times";
+            $stmt = $dbh->prepare($sql);
+            $stmt->execute($data);
+        }
+
         // Staff's details:
         $dbh = (new DB())->dbh;
         $sql = "SELECT * FROM _staff s JOIN _work w ON s.id=w.staff_id
@@ -123,9 +143,17 @@ class Logic {
         $stmt->execute();
         $staff = $stmt->fetch(\PDO::FETCH_OBJ);
 
+        // Staff's shifts:
+        $sql = "SELECT * FROM _shift WHERE staff_id=:staff_id";
+        $stmt = $dbh->prepare($sql);
+        $stmt->bindValue(':staff_id', $_GET['staff_id']);
+        $stmt->execute();
+        $shifts = $stmt->fetchAll(\PDO::FETCH_OBJ);
+
         $_return = [
             'page' => 'hr-detail',
             'details' => $staff,
+            'shifts' => $shifts,
         ];
 
         if ($staff) {

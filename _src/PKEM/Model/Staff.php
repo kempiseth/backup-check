@@ -72,5 +72,17 @@ class Staff {
         return str_pad($id, self::ID_PAD_LENGTH, 0, STR_PAD_LEFT);
     }
 
-}
+    static function KHdays($key) {
+        $KHdays = [
+            'mon' => 'ច័ន្ទ',
+            'tue' => 'អង្គារ',
+            'wed' => 'ពុធ',
+            'thu' => 'ព្រហស្បតិ៍',
+            'fri' => 'សុក្រ',
+            'sat' => 'សៅរ៍',
+            'sun' => 'អាទិត្យ',
+        ];
+        return $KHdays[$key];
+    }
 
+}

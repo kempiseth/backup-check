@@ -5,7 +5,7 @@ use PKEM\Model\Staff;
 $staffDetails = '';
 $status_text = '';
 $staffShifts = '';
-$newShift = '';
+$addShiftBtn = '';
 $today = date('Y-m-d');
 
 if ($details) {
@@ -25,20 +25,31 @@ if ($details) {
   <tr><td>មុខតំណែង</td><td>{$details->position}</td></tr>
   <tr><td>នាយកដ្ឋាន</td><td>{$details->department}</td></tr>
   <tr><td>ថ្ងៃចូលធ្វើការ</td><td>{$details->enroll_date}</td></tr>
-  <tr><td>ប្រាក់ខែ</td><td class='caution'>{$details->salary} USD</td></tr>
+  <tr><td>ប្រាក់ខែ</td><td class='caution'>{$details->salary}</td></tr>
 </table>";
 }
 
 foreach ($shifts as $shift) {
-    $shiftBlock = "
-<table class='key-value list'>
-  <tr><td></td><td></td></tr>
+    $work_days = json_decode($shift->work_days);
+    $work_days = array_map(['PKEM\Model\Staff','KHdays'], $work_days);
+    $work_days = join(' ', $work_days);
+
+    $work_times = json_decode($shift->work_times);
+    $work_times = join(' ដល់ ', $work_times);
+
+    $staffShifts .= "
+<table staff_id='$shift->staff_id' shift_id='$shift->id' class='key-value list item'>
+  <tr><td>តួនាទី</td><td>$shift->position</td></tr>
+  <tr><td>ប្រាក់ខែ</td><td class='caution'>$shift->salary</td></tr>
+  <tr><td>ថ្ងៃផ្ដើម</td><td>$shift->start_date</td></tr>
+  <tr><td>ថ្ងៃបញ្ចប់</td><td>$shift->end_date</td></tr>
+  <tr><td>ថ្ងៃធ្វើការ</td><td>$work_days</td></tr>
+  <tr><td>ម៉ោងធ្វើការ</td><td>$work_times</td></tr>
 </table>";
-    $staffShifts .= $shiftBlock;
 }
 
 if($_SESSION['user']->canInsert()) {
-    $newShift = "<button id='new-shift-btn'>បន្ថែមថ្មី</button>";
+    $addShiftBtn = "<button id='new-shift-btn'>បន្ថែមថ្មី</button>";
 }
 
 $section = <<<"SECTION"
@@ -99,7 +110,7 @@ $section = <<<"SECTION"
               <input type="hidden" name="staff_id" value="$details->id">
             </form>
         </div>
-        $newShift
+        $addShiftBtn
     </div>
 </div>
 SECTION;

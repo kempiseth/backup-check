@@ -55,3 +55,6 @@ a.back-button {
 .float-right {
     float: right;
 }
+table.item {
+    border: dashed 2px;
+}

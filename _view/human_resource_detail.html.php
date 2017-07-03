@@ -38,14 +38,19 @@ foreach ($shifts as $shift) {
     $work_times = join(' ដល់ ', $work_times);
 
     $staffShifts .= "
-<table staff_id='$shift->staff_id' shift_id='$shift->id' class='key-value list item'>
-  <tr><td>តួនាទី</td><td>$shift->position</td></tr>
-  <tr><td>ប្រាក់ខែ</td><td class='caution'>$shift->salary</td></tr>
-  <tr><td>ថ្ងៃផ្ដើម</td><td>$shift->start_date</td></tr>
-  <tr><td>ថ្ងៃបញ្ចប់</td><td>$shift->end_date</td></tr>
-  <tr><td>ថ្ងៃធ្វើការ</td><td>$work_days</td></tr>
-  <tr><td>ម៉ោងធ្វើការ</td><td>$work_times</td></tr>
-</table>";
+<div class='shift-wrap' staff_id='$shift->staff_id' shift_id='$shift->id'>
+  <div class='action-wrap'>
+    <button class='action-btn' action='update'>កែប្រែ</button>
+  </div>
+  <table class='key-value list item'>
+    <tr><td>តួនាទី</td><td key='position'>$shift->position</td></tr>
+    <tr><td>ប្រាក់ខែ</td><td key='salary' class='caution'>$shift->salary</td></tr>
+    <tr><td>ថ្ងៃផ្ដើម</td><td key='start_date'>$shift->start_date</td></tr>
+    <tr><td>ថ្ងៃបញ្ចប់</td><td key='end_date'>$shift->end_date</td></tr>
+    <tr><td>ថ្ងៃធ្វើការ</td><td key='work_days' _value='$shift->work_days'>$work_days</td></tr>
+    <tr><td>ម៉ោងធ្វើការ</td><td key='work_times' _value='$shift->work_times'>$work_times</td></tr>
+  </table>
+</div>";
 }
 
 if($_SESSION['user']->canInsert()) {
@@ -65,7 +70,7 @@ $section = <<<"SECTION"
     <div class="content">
         <div class="shifts">
             $staffShifts
-            <form id="new-shift-form" method="post" style="display:none">
+            <form id="shift-form" method="post" style="display:none">
               <table>
                 <tr>
                   <td><label for="position">តួនាទី</label></td>
@@ -119,12 +124,48 @@ $js = <<<"JS"
 <script>
 $('button#new-shift-btn').click(function(){
   $(this).hide('slow');
-  var form = $('form#new-shift-form');
+  var form = $('form#shift-form');
   form.show('slow'); form.find('input:first').focus();
 });
 $('button#cancel-shift-btn').click(function(){
-  $('form#new-shift-form').hide('slow');
+  //INSERT
+  $('form#shift-form').hide('slow');
   $('button#new-shift-btn').show('slow');
+
+  //UPDATE
+  $('div.shift-wrap').show('slow');
+  $('form#shift-form input#shift_id').remove();
+});
+$('div.shifts').on('click', '.action-btn', function(){
+  var action = $(this).attr('action');
+  var shift_block = $(this).parent().parent();
+  var shift_table = shift_block.find('table');
+  var shift_id = shift_block.attr('shift_id');
+
+  if (action == 'update') {
+    var shift_form = $('form#shift-form');
+    var position = shift_table.find("td[key='position']").text();
+    var salary = shift_table.find("td[key='salary']").text();
+    var start_date = shift_table.find("td[key='start_date']").text();
+    var end_date = shift_table.find("td[key='end_date']").text();
+    var work_days = JSON.parse( shift_table.find("td[key='work_days']").attr('_value') );
+    var work_times = JSON.parse( shift_table.find("td[key='work_times']").attr('_value') );
+
+    $('div.shift-wrap').hide('slow');
+    $('button#new-shift-btn').click();
+    shift_form.append('<input type="hidden" id="shift_id" name="shift_id" value="' + shift_id + '">');
+
+    shift_form.find('input#position').val(position);
+    shift_form.find('input#salary').val(salary);
+    shift_form.find('input#start_date').val(start_date);
+    shift_form.find('input#end_date').val(end_date);
+    shift_form.find('input[name="work_days[]"]').each(function(){
+      $(this).prop('checked', $.inArray($(this).val(), work_days) != -1);
+    });
+    shift_form.find('input[name="work_times[]"]').each(function(index){
+      $(this).val(work_times[index]);
+    });
+  }
 });
 </script>
 JS;

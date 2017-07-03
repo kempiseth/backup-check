@@ -55,6 +55,16 @@ a.back-button {
 .float-right {
     float: right;
 }
-table.item {
+div.shift-wrap {
     border: dashed 2px;
+    position: relative;
+    margin-bottom: 10px;
+}
+div.shift-wrap div.action-wrap {
+    position: absolute;
+    top: 5px;
+    right: -5px;
+}
+div.action-wrap .action-btn {
+    float: right;
 }

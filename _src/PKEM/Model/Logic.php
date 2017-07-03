@@ -114,8 +114,29 @@ class Logic {
         ];
     }
     private function human_resource_detail() {
+        // Update a shift:
+        if ( isset($_POST['shift_id']) ) {
+            $data = $_POST;
+            unset($data['staff_id']);
+            $data['work_days'] = json_encode($data['work_days']);
+            $data['work_times'] = json_encode($data['work_times']);
+            if ($data['end_date']) {
+                $end_date = 'end_date=:end_date,';
+            } else {
+                $end_date = '';
+                unset($data['end_date']);
+            }
+
+            $dbh = (new DB())->dbh;
+            $sql = "UPDATE _shift SET 
+                position=:position, salary=:salary, start_date=:start_date, 
+                $end_date work_days=:work_days, work_times=:work_times
+                WHERE id=:shift_id";
+            $stmt = $dbh->prepare($sql);
+            $stmt->execute($data);
+        }
         // Insert a new shift:
-        if ( isset($_POST['position']) ) {
+        else if ( isset($_POST['position']) ) {
             $data = $_POST;
             $data['work_days'] = json_encode($data['work_days']);
             $data['work_times'] = json_encode($data['work_times']);

@@ -6,14 +6,19 @@ $staffDetails = '';
 $status_text = '';
 $staffShifts = '';
 $addShiftBtn = '';
+$editStaffBtn = '';
 $today = date('Y-m-d');
 
 if ($details) {
     $id = Staff::formatId($details->id);
     $status = $details->is_active ? 'active' : 'caution';
     $status_text = $details->is_active ? 'នៅធ្វើការ' : 'បានលាឈប់នៅថ្ងៃ '.$details->leave_date;
+    $leave_reason = $details->is_active ? '' :
+        "<tr><td>មូលហេតុលាឈប់</td><td class='$status'>{$details->leave_reason}</td></tr>";
+
     $staffDetails = "<table staff_id='{$details->staff_id}' class='key-value list'>
   <tr><td colspan='2'><img src='{$details->photo}'></td></tr>
+  $leave_reason
   <tr><td>ឈ្មោះពេញ</td><td class='$status'>{$details->name}</td></tr>
   <tr><td>ភេទ</td><td>{$details->sex}</td></tr>
   <tr><td>ថ្ងៃខែឆ្នាំកំណើត</td><td>{$details->dob}</td></tr>
@@ -56,9 +61,13 @@ foreach ($shifts as $shift) {
 if($_SESSION['user']->canInsert()) {
     $addShiftBtn = "<button id='new-shift-btn'>បន្ថែមថ្មី</button>";
 }
+if($_SESSION['user']->canUpdate() && $details) {
+    $editStaffBtn = "<a class='link-button' href='/human-resource/edit?staff_id={$details->staff_id}'>កែប្រែបុគ្គលិក</a>";
+}
 
 $section = <<<"SECTION"
-<a class="back-button" href="/human-resource">ត្រលប់ក្រោយ</a>
+<a class="link-button" href="/human-resource">ត្រលប់ក្រោយ</a>
+$editStaffBtn
 <div id="staff-detail" class="task">
     <div class="title">ព័ត៌មានលម្អិត | $id | <span class="$status">$status_text</span> </div>
     <div class="content">

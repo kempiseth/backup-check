@@ -16,24 +16,34 @@ $(function(){
         var action = $(this).attr('action');
         var row = $(this).parent().parent();
         var staff_id = row.attr('staff_id');
-        if ($.inArray(action, ['disable', 'remove']) != -1 && confirm('តើ​អ្នក​ប្រាកដ​ឬ​អត់?')) {
+
+        if (action=='remove' && confirm('តើ​អ្នក​ប្រាកដ​ឬ​អត់?')) {
             $.post({
                 url: '',
                 data: {_ajax: action+'Staff', staff_id: staff_id},
                 success: function(result) {
                     if ($.trim(result)=='OK') {
-                        if (action=='remove') {
-                            row.remove();
-                        } else if (action=='disable') {
-                            row.find('td:nth-child(2)').attr('class','caution');
-                            img_icon.attr({
-                                src: '/static/image/delete-red.jpg',
-                                action: 'remove',
-                                title: 'Remove'});
-                        }
+                        row.remove();
+                    } else {
+                        console.log(result);
                     }
                 },
             });
+        } else if (action=='disable') {
+            var reason = prompt("Please give a reason:", "");
+            if (reason != null) {
+                $.post({
+                    url: '',
+                    data: {_ajax: action+'Staff', staff_id: staff_id, reason: reason},
+                    success: function(result) {
+                        if ($.trim(result)=='OK') {
+                            row.remove();
+                        } else {
+                            console.log(result);
+                        }
+                    },
+                });
+            }
         } else if (action=='update') {
             window.location.replace(base_url+'/edit?staff_id='+staff_id);
         }

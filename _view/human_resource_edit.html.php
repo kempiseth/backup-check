@@ -13,6 +13,10 @@ $staffUpdate = $_SESSION['user']->canUpdate() ?
         <label class='mr20 active'><input type='radio' name='is_active' value='1'> នៅធ្វើការ </label>
         <label class='mr20 caution'><input type='radio' name='is_active' value='0'> បានលាឈប់ </label>
       </td></tr>
+      <tr id='reason_row'>
+        <td><label for='leave_reason'>មូលហេតុលាឈប់</label></td>
+        <td><input type='text' id='leave_reason' name='leave_reason' value='{$staff->leave_reason}' class='_input caution'></td>
+      </tr>
       <tr>
         <td><label for='name'>ឈ្មោះពេញ</label></td>
         <td><input type='text' id='name' name='name' value='{$staff->name}'
@@ -83,7 +87,7 @@ $staffUpdate = $_SESSION['user']->canUpdate() ?
 </form>" : '';
 
 $section = <<<"SECTION"
-<a class="back-button" href="/human-resource">ត្រលប់ក្រោយ</a>
+<a class="link-button" href="/human-resource">ត្រលប់ក្រោយ</a>
 <div id="staff" class="task">
     <div class="title">បុគ្គលិក :: $staff->name</div>
     <div class="content">
@@ -100,6 +104,8 @@ $('select[name=sex] option[value={$staff->sex}]').prop('selected',true);
 $('input[name=is_active]').change(function() {
     var checked_color = $('input[name=is_active]:checked').css('color');
     $('input#name').css('color', checked_color);
+
+    $('tr#reason_row').toggle( $('input[name=is_active]:checked').val() == 0 );
 }).change();
 
 if( $('input.image-data').val() ){

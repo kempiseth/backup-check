@@ -8,11 +8,11 @@ foreach ($staffs as $staff) {
     $status = $staff->is_active ? 'active' : 'caution';
     $deleteIcon = $_SESSION['user']->canDelete() ?
         ($staff->is_active ?
-            "<img class='icon' action='disable' src='/static/image/delete.jpg' title='Disable'>" :
-            "<img class='icon' action='remove' src='/static/image/delete-red.jpg' title='Remove'>"
+            "<img class='icon' action='disable' src='/static/image/delete.jpg' title='លាឈប់'>" :
+            "<img class='icon' action='remove' src='/static/image/delete-red.jpg' title='លុបទិន្នន័យ'>"
         ) : '';
     $updateIcon = $_SESSION['user']->canUpdate() ?
-        "<img class='icon' action='update' src='/static/image/update.jpg' title='Edit'>" : '';
+        "<img class='icon' action='update' src='/static/image/update.jpg' title='កែប្រែ'>" : '';
 
     $staffsRows .= "<tr staff_id='{$staff->id}'>
     <td>$id</td>

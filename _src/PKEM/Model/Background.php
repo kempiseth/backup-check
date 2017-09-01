@@ -51,8 +51,9 @@ class Background {
 
     private function disableStaff() {
         $dbh = (new DB())->dbh;
-        $sql = "UPDATE ".Staff::WORK_TABLE." SET is_active=0, leave_date=CURDATE() WHERE staff_id=:staff_id";
+        $sql = "UPDATE ".Staff::WORK_TABLE." SET is_active=0, leave_date=CURDATE(), leave_reason=:leave_reason WHERE staff_id=:staff_id";
         $stmt = $dbh->prepare($sql);
+        $stmt->bindValue(':leave_reason', $_POST['reason']);
         $stmt->bindValue(':staff_id', $_POST['staff_id']);
         $_return = $stmt->execute();
         echo $_return ? 'OK' : 'FAILED';
@@ -62,12 +63,15 @@ class Background {
         $data = $_POST;
         unset($data['_ajax']);
         $leave_date = $data['is_active'] ? 'NULL' : 'CURDATE()';
+        if ($data['is_active']) {
+            $data['leave_reason'] = '';
+        }
 
         $dbh = (new DB())->dbh;
         $sql = "UPDATE _staff s JOIN _work w ON (s.id = w.staff_id)
           SET w.is_active=:is_active, s.name=:name, s.sex=:sex, s.photo=:photo, s.dob=:dob, s.phone=:phone,
-            s.address=:address, s.education=:education, s.skill=:skill, s.language=:language,
-            w.position=:position, w.department=:department, w.enroll_date=:enroll_date, w.leave_date=$leave_date, w.salary=:salary
+            s.address=:address, s.education=:education, s.skill=:skill, s.language=:language, w.position=:position,
+            w.department=:department, w.enroll_date=:enroll_date, w.leave_date=$leave_date, w.leave_reason=:leave_reason, w.salary=:salary
           WHERE s.id=:staff_id";
         $stmt = $dbh->prepare($sql);
         $_return = $stmt->execute($data);

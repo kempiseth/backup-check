@@ -24,8 +24,12 @@
     table td#roles label {
         width: 48%;
     }
-    nav {
+    nav#nav-main {
         display: none;
+    }
+    nav#sub-menu {
+        clear: both;
+        background-color: ghostwhite;
     }
     nav a {
         display: block;

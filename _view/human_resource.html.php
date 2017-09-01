@@ -114,6 +114,10 @@ $section = <<<"SECTION"
 </div>
 SECTION;
 
+$submenu = <<<"SUBMENU"
+<a href="?terminated">បញ្ជីអ្នកលាឈប់</a>
+SUBMENU;
+
 $js = <<<"JS"
 <script src="/static/js/$page.js"></script>
 JS;

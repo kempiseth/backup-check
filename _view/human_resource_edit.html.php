@@ -10,8 +10,8 @@ $staffUpdate = $_SESSION['user']->canUpdate() ?
     <legend>កែប្រែទិន្នន័យបុគ្គលិក</legend>
     <table id='staff-update-table' class='open'>
       <tr><td colspan='2'>
-        <label class='mr20 active'><input type='radio' name='is_active' value='1'> សកម្ម </label>
-        <label class='mr20 caution'><input type='radio' name='is_active' value='0'> អសកម្ម </label>
+        <label class='mr20 active'><input type='radio' name='is_active' value='1'> នៅធ្វើការ </label>
+        <label class='mr20 caution'><input type='radio' name='is_active' value='0'> បានលាឈប់ </label>
       </td></tr>
       <tr>
         <td><label for='name'>ឈ្មោះពេញ</label></td>

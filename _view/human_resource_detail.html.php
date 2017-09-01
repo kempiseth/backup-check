@@ -11,7 +11,7 @@ $today = date('Y-m-d');
 if ($details) {
     $id = Staff::formatId($details->id);
     $status = $details->is_active ? 'active' : 'caution';
-    $status_text = $details->is_active ? 'សកម្ម' : 'ឈប់ថ្ងៃ '.$details->leave_date;
+    $status_text = $details->is_active ? 'នៅធ្វើការ' : 'បានលាឈប់នៅថ្ងៃ '.$details->leave_date;
     $staffDetails = "<table staff_id='{$details->staff_id}' class='key-value list'>
   <tr><td colspan='2'><img src='{$details->photo}'></td></tr>
   <tr><td>ឈ្មោះពេញ</td><td class='$status'>{$details->name}</td></tr>

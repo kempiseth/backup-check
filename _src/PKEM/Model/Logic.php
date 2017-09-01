@@ -97,12 +97,20 @@ class Logic {
             $staff->insertIntoDB();
         }
 
+        $is_active = 1;
+        $LIMIT = 20;
+        if (isset($_GET['terminated'])) {
+            $is_active = 0;
+            $LIMIT = 50;
+        }
+
         // Staffs' list:
         $dbh = (new DB())->dbh;
         $sql = "SELECT s.id id, s.name name, s.sex sex, s.dob dob,
             w.position position, w.is_active is_active
             FROM _staff s JOIN _work w ON s.id=w.staff_id
-            ORDER BY s.id DESC LIMIT 10";
+            WHERE is_active=$is_active
+            ORDER BY s.id DESC LIMIT $LIMIT";
         $stmt = $dbh->prepare($sql);
         $stmt->execute();
         $staffs = $stmt->fetchAll(\PDO::FETCH_OBJ);
@@ -113,6 +121,7 @@ class Logic {
             'staffs' => $staffs,
         ];
     }
+
     private function human_resource_detail() {
         // Update a shift:
         if ( isset($_POST['shift_id']) ) {
@@ -186,6 +195,7 @@ class Logic {
 
         return $_return;
     }
+
     private function human_resource_edit() {
         $dbh = (new DB())->dbh;
         $sql = "SELECT * FROM _staff s JOIN _work w ON s.id=w.staff_id

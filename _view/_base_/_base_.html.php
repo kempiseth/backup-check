@@ -41,6 +41,7 @@
                     <a id="logout" class="caution" href="/logout">ចាកចេញ</a>
                 <?php endif; ?>
             </nav>
+            <nav id="sub-menu"><?= @$submenu ?></nav>
             <main class="group">
                 <div id="main-left">
                     <section id="section-main">

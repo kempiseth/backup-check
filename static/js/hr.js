@@ -9,6 +9,13 @@ $(function(){
         table.show();
         table.find('input[type=text]').filter(':first').focus();
     });
+    $('table#select-staff').on('click','td.action button.day-off',function(event){
+        event.stopPropagation();
+
+        var row = $(this).parent().parent();
+        var staff_id = row.attr('staff_id');
+        // TODO: Use jQuery Dialog
+    });
     $('table#select-staff').on('click','td.action img.icon',function(event){
         event.stopPropagation();
 

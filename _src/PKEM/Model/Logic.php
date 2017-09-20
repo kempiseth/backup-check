@@ -55,7 +55,7 @@ class Logic {
 
         // Users' list:
         $dbh = (new DB())->dbh;
-        $sql = "SELECT * FROM ".User::TABLE_NAME;
+        $sql = "SELECT * FROM " . User::TABLE_NAME;
         $stmt = $dbh->prepare($sql);
         $stmt->execute();
         $users = $stmt->fetchAll(\PDO::FETCH_OBJ);
@@ -71,9 +71,9 @@ class Logic {
      * @Page: login
      */
     public function login() {
-        if ( isset($_POST['username']) ) {
+        if (isset($_POST['username'])) {
             $user = new User($_POST['username'], $_POST['password']);
-            if ( $user->isValid() ) {
+            if ($user->isValid()) {
                 $_SESSION['userid'] = $user->getId();
                 Route::routeTo(START_PATH);
             } else {
@@ -122,9 +122,38 @@ class Logic {
         ];
     }
 
+    /**
+     * @Page: human-resource-day-off
+     */
+    public function human_resource_day_off() {
+        if (isset($_POST['staff_id'])) {
+            $dbh = (new DB())->dbh;
+            $sql = "INSERT INTO _day_off SET 
+                staff_id=:staff_id, from_date=:from_date, to_date=:to_date, description=:description";
+            $stmt = $dbh->prepare($sql);
+            $stmt->execute($_POST);
+            Route::routeTo(HR_PATH);
+        }
+
+        if (isset($_GET['staff_id'])) {
+            $dbh = (new DB())->dbh;
+            $sql = "SELECT id, name FROM _staff s WHERE s.id=:staff_id";
+            $stmt = $dbh->prepare($sql);
+            $stmt->bindValue(':staff_id', $_GET['staff_id']);
+            $stmt->execute();
+            $staff = $stmt->fetch(\PDO::FETCH_OBJ);
+
+            return [
+                'title' => 'សុំច្បាប់',
+                'page' => 'hr-day-off',
+                'staff' => $staff,
+            ];
+        }
+    }
+
     private function human_resource_detail() {
         // Update a shift:
-        if ( isset($_POST['shift_id']) ) {
+        if (isset($_POST['shift_id'])) {
             $data = $_POST;
             unset($data['staff_id']);
             $data['work_days'] = json_encode($data['work_days']);
@@ -145,7 +174,7 @@ class Logic {
             $stmt->execute($data);
         }
         // Insert a new shift:
-        else if ( isset($_POST['position']) ) {
+        else if (isset($_POST['position'])) {
             $data = $_POST;
             $data['work_days'] = json_encode($data['work_days']);
             $data['work_times'] = json_encode($data['work_times']);
@@ -224,11 +253,11 @@ class Logic {
      * @Page: account
      */
     public function account() {
-        if ( isset($_POST['password']) ) {
+        if (isset($_POST['password'])) {
             if ($_POST['password'] == $_POST['confirm-password']) {
                 //Update Password:
                 $dbh = (new DB())->dbh;
-                $sql = "UPDATE ".User::TABLE_NAME." SET password=:password WHERE id=:id";
+                $sql = "UPDATE " . User::TABLE_NAME . " SET password=:password WHERE id=:id";
                 $stmt = $dbh->prepare($sql);
                 $stmt->bindValue(':password', User::hashPassword($_POST['password']));
                 $stmt->bindValue(':id', $_SESSION['userid']);

@@ -65,16 +65,16 @@
 
         <script src="/static/js/app.js"></script>
         <script src="/static/js/main.js"></script>
-        <script>
         <?php if (isset($_SESSION['user'])): ?>
-            var roles = {
-                "select":true,
-                "insert":<?= $_SESSION['user']->canInsert() ? 'true' : 'false' ?>,
-                "update":<?= $_SESSION['user']->canUpdate() ? 'true' : 'false' ?>,
-                "delete":<?= $_SESSION['user']->canDelete() ? 'true' : 'false' ?>,
-            };
-        <?php endif; ?>
+        <script>
+        var roles = {
+            "select":true,
+            "insert":<?= $_SESSION['user']->canInsert() ? 'true' : 'false' ?>,
+            "update":<?= $_SESSION['user']->canUpdate() ? 'true' : 'false' ?>,
+            "delete":<?= $_SESSION['user']->canDelete() ? 'true' : 'false' ?>,
+        };
         </script>
+        <?php endif; ?>
         <?= @$js ?>
     </body>
 </html>

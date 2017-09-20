@@ -1,3 +1,5 @@
+/* global roles */
+
 $(function(){
     var base_url = '/human-resource';
 
@@ -14,55 +16,55 @@ $(function(){
 
         var row = $(this).parent().parent();
         var staff_id = row.attr('staff_id');
-        // TODO: Use jQuery Dialog
+        sessionStorage.staff_id = staff_id;
+        location.href = base_url+"/day-off?staff_id="+staff_id;
     });
     $('table#select-staff').on('click','td.action img.icon',function(event){
         event.stopPropagation();
 
-        var img_icon = $(this);
         var action = $(this).attr('action');
         var row = $(this).parent().parent();
         var staff_id = row.attr('staff_id');
 
-        if (action=='remove' && confirm('តើ​អ្នក​ប្រាកដ​ឬ​អត់?')) {
+        if (action==='remove' && confirm('តើ​អ្នក​ប្រាកដ​ឬ​អត់?')) {
             $.post({
                 url: '',
                 data: {_ajax: action+'Staff', staff_id: staff_id},
                 success: function(result) {
-                    if ($.trim(result)=='OK') {
+                    if ($.trim(result)==='OK') {
                         row.remove();
                     } else {
                         console.log(result);
                     }
-                },
+                }
             });
-        } else if (action=='disable') {
+        } else if (action==='disable') {
             var reason = prompt("Please give a reason:", "");
-            if (reason != null) {
+            if (reason !== null) {
                 $.post({
                     url: '',
                     data: {_ajax: action+'Staff', staff_id: staff_id, reason: reason},
                     success: function(result) {
-                        if ($.trim(result)=='OK') {
+                        if ($.trim(result)==='OK') {
                             row.remove();
                         } else {
                             console.log(result);
                         }
-                    },
+                    }
                 });
             }
-        } else if (action=='update') {
+        } else if (action==='update') {
             window.location.replace(base_url+'/edit?staff_id='+staff_id);
         }
     });
     $('table#select-staff').on('click','tr',function(){
         var staff_id = $(this).attr('staff_id');
-        if (getSelection().toString() == '') {
+        if (getSelection().toString() === '') {
             window.location.replace(base_url+'/detail?staff_id='+staff_id);
         }
     });
     $('input#staff-search').keyup(function(event){
-        if ( event.which == 13 ) {
+        if ( event.which === 13 ) {
             var text = $(this).val();
             $.post({
                 url: '',
@@ -88,7 +90,7 @@ $(function(){
                             $('table#select-staff').append(row);
                         });
                     }
-                },
+                }
             });
         }
     });
@@ -131,9 +133,9 @@ $(function(){
                     wrapper.find('input.image-data').val(canvas.toDataURL());
                     wrapper.css('border','none');
                     $(img).remove(); canvas.scrollIntoView();
-                }
+                };
                 img.src = e.target.result;
-            }
+            };
             reader.readAsDataURL(f);
         }
     });

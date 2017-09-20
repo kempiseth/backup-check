@@ -12,7 +12,7 @@ foreach ($staffs as $staff) {
             "<img class='icon' action='remove' src='/static/image/delete-red.jpg' title='លុបទិន្នន័យ'>"
         ) : '';
     $updateIcon = $_SESSION['user']->canUpdate() ?
-        "<button class='day-off'>សុំច្បាប់</button>" .
+        (isset($_GET['terminated']) ? '' : "<button class='day-off'>សុំច្បាប់</button>") .
         "<img class='icon' action='update' src='/static/image/update.jpg' title='កែប្រែ'>" : '';
 
     $staffsRows .= "<tr staff_id='{$staff->id}'>

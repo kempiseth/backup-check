@@ -1,10 +1,11 @@
 <?php
 
- if ( file_exists($_SERVER['DOCUMENT_ROOT'] . DIRECTORY_SEPARATOR . '.local') ) {
-     error_reporting(E_ALL);
+// Show error in local environment:
+if ( file_exists($_SERVER['DOCUMENT_ROOT'] . DIRECTORY_SEPARATOR . '.local') ) {
+    error_reporting(E_ALL);
     ini_set('display_errors', 1);
- }
- 
+}
+
 // --- REQUIRE --- //
 require_once __DIR__ . '/vendor/autoload.php';
 require_once __DIR__ . '/_config/_config.php';

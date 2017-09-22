@@ -55,7 +55,7 @@ a.link-button {
 .float-right {
     float: right;
 }
-div.shift-wrap {
+div.block-wrap {
     border: dashed 2px;
     position: relative;
     margin-bottom: 10px;

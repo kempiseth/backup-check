@@ -152,6 +152,7 @@ class Logic {
     }
 
     private function human_resource_detail() {
+        
         // Update a shift:
         if (isset($_POST['shift_id'])) {
             $data = $_POST;
@@ -173,6 +174,7 @@ class Logic {
             $stmt = $dbh->prepare($sql);
             $stmt->execute($data);
         }
+
         // Insert a new shift:
         else if (isset($_POST['position'])) {
             $data = $_POST;
@@ -209,10 +211,18 @@ class Logic {
         $stmt->execute();
         $shifts = $stmt->fetchAll(\PDO::FETCH_OBJ);
 
+        // Staff's day-off:
+        $sql = "SELECT * FROM _day_off WHERE staff_id=:staff_id LIMIT 5";
+        $stmt = $dbh->prepare($sql);
+        $stmt->bindValue(':staff_id', $_GET['staff_id']);
+        $stmt->execute();
+        $day_offs = $stmt->fetchAll(\PDO::FETCH_OBJ);
+
         $_return = [
             'page' => 'hr-detail',
             'details' => $staff,
             'shifts' => $shifts,
+            'day_offs' => $day_offs,
         ];
 
         if ($staff) {

@@ -5,6 +5,7 @@ use PKEM\Model\Staff;
 $staffDetails = '';
 $status_text = '';
 $staffShifts = '';
+$dayOffs = '';
 $addShiftBtn = '';
 $editStaffBtn = '';
 $today = date('Y-m-d');
@@ -43,7 +44,7 @@ foreach ($shifts as $shift) {
     $work_times = join(' ដល់ ', $work_times);
 
     $staffShifts .= "
-<div class='shift-wrap' staff_id='$shift->staff_id' shift_id='$shift->id'>
+<div class='block-wrap' staff_id='$shift->staff_id' shift_id='$shift->id'>
   <div class='action-wrap'>
     <button class='action-btn' action='update'>កែប្រែ</button>
   </div>
@@ -54,6 +55,17 @@ foreach ($shifts as $shift) {
     <tr><td>ថ្ងៃបញ្ចប់</td><td key='end_date'>$shift->end_date</td></tr>
     <tr><td>ថ្ងៃធ្វើការ</td><td key='work_days' _value='$shift->work_days'>$work_days</td></tr>
     <tr><td>ម៉ោងធ្វើការ</td><td key='work_times' _value='$shift->work_times'>$work_times</td></tr>
+  </table>
+</div>";
+}
+
+foreach ($day_offs as $day_off) {
+    $dayOffs .= "
+<div class='block-wrap' staff_id='$day_off->staff_id' day_off_id='$day_off->id'>
+  <table class='key-value list item'>
+    <tr><td>ពីថ្ងៃ</td><td key='from_date'>$day_off->from_date</td></tr>
+    <tr><td>ទៅដល់ថ្ងៃ</td><td key='to_date'>$day_off->to_date</td></tr>
+    <tr><td>សេចក្ដីពិពណ៌នា</td><td key='description'>$day_off->description</td></tr>
   </table>
 </div>";
 }
@@ -69,7 +81,7 @@ $section = <<<"SECTION"
 <a class="link-button" href="/human-resource">ត្រលប់ក្រោយ</a>
 $editStaffBtn
 <div id="staff-detail" class="task">
-    <div class="title">ព័ត៌មានលម្អិត | $id | <span class="$status">$status_text</span> </div>
+    <div class="title">ព័ត៌មានលម្អិត | $id <br><span class="$status">$status_text</span> </div>
     <div class="content">
         $staffDetails
     </div>
@@ -125,6 +137,14 @@ $editStaffBtn
             </form>
         </div>
         $addShiftBtn
+    </div>
+</div>
+<div id="day-off-list" class="task">
+    <div class="title">ប្រវត្តការសុំច្បាប់</div>
+    <div class="content">
+        <div class="day-offs">
+            $dayOffs
+        </div>
     </div>
 </div>
 SECTION;

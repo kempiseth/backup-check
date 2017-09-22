@@ -61,17 +61,24 @@ class Background {
 
     private function editStaff() {
         $data = $_POST;
+        $old_is_active = $data['old_is_active'];
+        
         unset($data['_ajax']);
+        unset($data['old_is_active']);
+
         $leave_date = $data['is_active'] ? 'NULL' : 'CURDATE()';
         if ($data['is_active']) {
             $data['leave_reason'] = '';
         }
 
+        $set_leave_date = 
+            ($old_is_active == $data['is_active']) ? '' : "w.leave_date=$leave_date,";
+
         $dbh = (new DB())->dbh;
         $sql = "UPDATE _staff s JOIN _work w ON (s.id = w.staff_id)
           SET w.is_active=:is_active, s.name=:name, s.sex=:sex, s.photo=:photo, s.dob=:dob, s.phone=:phone,
             s.address=:address, s.education=:education, s.skill=:skill, s.language=:language, w.position=:position,
-            w.department=:department, w.enroll_date=:enroll_date, w.leave_date=$leave_date, w.leave_reason=:leave_reason, w.salary=:salary
+            w.department=:department, w.enroll_date=:enroll_date, $set_leave_date w.leave_reason=:leave_reason, w.salary=:salary
           WHERE s.id=:staff_id";
         $stmt = $dbh->prepare($sql);
         $_return = $stmt->execute($data);

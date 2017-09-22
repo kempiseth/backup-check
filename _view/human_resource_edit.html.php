@@ -6,6 +6,7 @@ $staffUpdate = $_SESSION['user']->canUpdate() ?
 "<form name='staff-update-form' method='post'>
   <input type='hidden' name='_ajax' value='editStaff'>
   <input type='hidden' name='staff_id' value='{$staff->staff_id}'>
+  <input type='hidden' name='old_is_active' value='{$staff->is_active}'>
   <fieldset>
     <legend>កែប្រែទិន្នន័យបុគ្គលិក</legend>
     <table id='staff-update-table' class='open'>

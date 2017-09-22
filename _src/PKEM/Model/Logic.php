@@ -132,7 +132,7 @@ class Logic {
                 staff_id=:staff_id, from_date=:from_date, to_date=:to_date, description=:description";
             $stmt = $dbh->prepare($sql);
             $stmt->execute($_POST);
-            Route::routeTo(HR_PATH);
+            Route::routeTo(HR_PATH.'/detail?staff_id='.$_POST['staff_id']);
         }
 
         if (isset($_GET['staff_id'])) {

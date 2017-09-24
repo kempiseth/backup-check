@@ -104,12 +104,21 @@ class Logic {
             $LIMIT = 50;
         }
 
+        $SELECT = 's.id id, s.name name, s.sex sex, s.dob dob,
+            w.position position, w.is_active is_active';
+        $FROM = "_staff s JOIN _work w ON s.id=w.staff_id";
+        $WHERE = "is_active=$is_active";
+
+        if (isset($_GET['took-day-off'])) {
+            $FROM .= ' JOIN _day_off d ON s.id=d.staff_id';
+            $WHERE .= ' AND d.to_date >= CURDATE()';
+        }
+
         // Staffs' list:
         $dbh = (new DB())->dbh;
-        $sql = "SELECT s.id id, s.name name, s.sex sex, s.dob dob,
-            w.position position, w.is_active is_active
-            FROM _staff s JOIN _work w ON s.id=w.staff_id
-            WHERE is_active=$is_active
+        $sql = "SELECT $SELECT
+            FROM $FROM
+            WHERE $WHERE
             ORDER BY s.id DESC LIMIT $LIMIT";
         $stmt = $dbh->prepare($sql);
         $stmt->execute();
@@ -152,7 +161,7 @@ class Logic {
     }
 
     private function human_resource_detail() {
-        
+
         // Update a shift:
         if (isset($_POST['shift_id'])) {
             $data = $_POST;

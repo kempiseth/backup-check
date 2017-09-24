@@ -54,13 +54,13 @@ $(function(){
                 });
             }
         } else if (action==='update') {
-            window.location.replace(base_url+'/edit?staff_id='+staff_id);
+            location.href = base_url+'/edit?staff_id='+staff_id;
         }
     });
     $('table#select-staff').on('click','tr',function(){
         var staff_id = $(this).attr('staff_id');
         if (getSelection().toString() === '') {
-            window.location.replace(base_url+'/detail?staff_id='+staff_id);
+            location.href = base_url+'/detail?staff_id='+staff_id;
         }
     });
     $('input#staff-search').keyup(function(event){

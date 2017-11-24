@@ -44,6 +44,10 @@ class Staff {
 
     public function insertIntoDB() {
         $dbh = (new DB())->dbh;
+
+        try {
+        $dbh->beginTransaction();
+
         $sql = "INSERT INTO ".self::TABLE_NAME." SET
             name=:name, sex=:sex, photo=:photo, dob=:dob, phone=:phone, address=:address, education=:education, skill=:skill, language=:language";
         $stmt = $dbh->prepare($sql);
@@ -58,14 +62,24 @@ class Staff {
         $stmt->bindValue(':language', $this->language);
         $stmt->execute();
 
+        $staff_id = $dbh->lastInsertId();
+
         $sql = "INSERT INTO ".self::WORK_TABLE." SET
-            staff_id=LAST_INSERT_ID(), position=:position, department=:department, enroll_date=:enroll_date, salary=:salary";
+            staff_id=:staff_id, position=:position, department=:department, enroll_date=:enroll_date, salary=:salary";
         $stmt = $dbh->prepare($sql);
+        $stmt->bindValue(':staff_id', $staff_id);
         $stmt->bindValue(':position', $this->position);
         $stmt->bindValue(':department', $this->department);
         $stmt->bindValue(':enroll_date', $this->enroll_date);
         $stmt->bindValue(':salary', $this->salary);
         $stmt->execute();
+        
+        $dbh->commit();
+        } catch(PDOExecption $e) {
+            $dbh->rollback();
+            print "Error!: " . $e->getMessage() . "</br>";
+        }
+
     }
 
     static function formatId($id) {
